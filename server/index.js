@@ -19,9 +19,7 @@ mongoose
 app.use(express.json());
 app.use(UserRoutes);
 app.use(TaskRoutes);
-app.get('/',(req,res)=>{
-  res.send("hello")
-  )
+
 
 app.listen(PORT, (err) => {
   if (err) {
