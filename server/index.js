@@ -10,6 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 app.use(cors());
+app.get('/',(req,res)=>{res.send("hello")})
 
 mongoose
   .connect(`mongodb+srv://ravi4116patidar:ravi600882@cluster0.mjbm1ae.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=Cluster0`)
