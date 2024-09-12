@@ -4,6 +4,7 @@ import {Link, useNavigate  } from "react-router-dom";
 import { HiAtSymbol } from "react-icons/hi2";
 import { FaLock } from "react-icons/fa";
 import axios from "axios";
+import { baseUrl } from "../../Urls";
 
 function Login() {
   const navigate=useNavigate()
@@ -19,7 +20,7 @@ function Login() {
   const handleSubmit =async (e:any) => {
     e.preventDefault()
     try{
-      const res=await axios.post("http://localhost:5000/login",formData)
+      const res=await axios.post(`${baseUrl}/login`,formData)
       localStorage.setItem('token',res.data.token)
 
       if(res.status===200){

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TodoItem from '../HomePage/TodoItem';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { baseUrl } from '../Urls';
 
 // Define the Task interface matching the model in the backend
 interface Task {
@@ -24,7 +25,7 @@ const Todo: React.FC = () => {
         const fetchTasks = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const response = await axios.get('http://localhost:5000/getTask', {
+                const response = await axios.get(`${baseUrl}/getTask`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setTodos(response.data);
@@ -57,7 +58,7 @@ const Todo: React.FC = () => {
             if (isEditing && editId) {
                 // Update existing task
                 const response = await axios.put(
-                    `http://localhost:5000/updateTask/${editId}`,
+                    `${baseUrl}/updateTask/${editId}`,
                     formData,
                     {
                         headers: { Authorization: `Bearer ${token}` },
@@ -70,7 +71,7 @@ const Todo: React.FC = () => {
             } else {
                 // Create new task
                 const response = await axios.post(
-                    'http://localhost:5000/createTask',
+                    `${baseUrl}/createTask`,
                     formData,
                     {
                         headers: { Authorization: `Bearer ${token}` },
@@ -89,7 +90,7 @@ const Todo: React.FC = () => {
     const handleDelete = async (id: string) => {
         try {
             const token = localStorage.getItem('token');
-            await axios.delete(`http://localhost:5000/deleteTask/${id}`, {
+            await axios.delete(`${baseUrl}/deleteTask/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             // Remove the task from the list after deletion
